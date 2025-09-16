@@ -56,7 +56,7 @@ export type MemberItem = {
   cv?: string;
 };
 
-async function getContent(directory: string): Promise<any[]> {
+async function getContent<T>(directory: string): Promise<T[]> {
   const fullPath = path.join(contentDirectory, directory);
   const fileNames = fs.readdirSync(fullPath);
   const allData = await Promise.all(fileNames.map(async (fileName) => {
@@ -70,8 +70,6 @@ async function getContent(directory: string): Promise<any[]> {
       .process(matterResult.content);
     const contentHtml = processedContent.toString();
 
-    
-
     return {
       id, // This will serve as the slug
       contentHtml,
@@ -79,7 +77,7 @@ async function getContent(directory: string): Promise<any[]> {
       ...matterResult.data,
     };
   }));
-  return allData;
+  return allData as T[];
 }
 
 export async function getSoftwareItem(slug: string): Promise<SoftwareItem | undefined> {
@@ -124,17 +122,17 @@ export async function getPublicationItem(slug: string): Promise<PublicationItem 
 }
 
 export function getPublications(): Promise<PublicationItem[]> {
-  return getContent('publications') as Promise<PublicationItem[]>;
+  return getContent<PublicationItem>('publications');
 }
 
 export function getMembers(): Promise<MemberItem[]> {
-  return getContent('members') as Promise<MemberItem[]>;
+  return getContent<MemberItem>('members');
 }
 
 export function getNews(): Promise<NewsItem[]> {
-  return getContent('news') as Promise<NewsItem[]>;
+  return getContent<NewsItem>('news');
 }
 
 export function getSoftware(): Promise<SoftwareItem[]> {
-  return getContent('software') as Promise<SoftwareItem[]>;
+  return getContent<SoftwareItem>('software');
 }
