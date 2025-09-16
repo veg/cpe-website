@@ -1,4 +1,5 @@
 import Image from 'next/image';
+import Link from 'next/link';
 
 export default function Home() {
   return (
@@ -60,30 +61,30 @@ export default function Home() {
         <div className="bg-white rounded-lg shadow-md p-6 flex flex-col items-center text-center">
           <h4 className="text-2xl font-bold text-gray-800 mb-3">Our Mission</h4>
           <p className="text-gray-600 mb-4">Learn about our core purpose and objectives.</p>
-          <a href="/mission" className="mt-auto bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full transition duration-300">
+          <Link href="/mission" className="mt-auto bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full transition duration-300">
             Mission
-          </a>
+          </Link>
         </div>
         <div className="bg-white rounded-lg shadow-md p-6 flex flex-col items-center text-center">
           <h4 className="text-2xl font-bold text-gray-800 mb-3">News Center</h4>
           <p className="text-gray-600 mb-4">News</p>
-          <a href="/news" className="mt-auto bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full transition duration-300">
+          <Link href="/news" className="mt-auto bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full transition duration-300">
             News
-          </a>
+          </Link>
         </div>
         <div className="bg-white rounded-lg shadow-md p-6 flex flex-col items-center text-center">
           <h4 className="text-2xl font-bold text-gray-800 mb-3">People</h4>
           <p className="text-gray-600 mb-4">CPE is co-directed by <a href="https://slkp.info" className="text-blue-600 hover:underline">Sergei Pond</a> and <a href="https://mol.ax" className="text-blue-600 hover:underline">Maciek Boni</a> and includes ZZ members from XX colleges and YY departments.</p>
-          <a href="/team" className="mt-auto bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full transition duration-300">
+          <Link href="/team" className="mt-auto bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full transition duration-300">
             People
-          </a>
+          </Link>
         </div>
         <div className="bg-white rounded-lg shadow-md p-6 flex flex-col items-center text-center">
           <h4 className="text-2xl font-bold text-gray-800 mb-3">Tools</h4>
           <p className="text-gray-600 mb-4">A core strength of the Center is its comprehensive portfolio of software and modeling tools.</p>
-          <a href="/software" className="mt-auto bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full transition duration-300">
+          <Link href="/software" className="mt-auto bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full transition duration-300">
             Tools
-          </a>
+          </Link>
         </div>
       </section>
     </div>

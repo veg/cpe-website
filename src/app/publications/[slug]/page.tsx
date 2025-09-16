@@ -1,5 +1,4 @@
 import { getPublicationItem } from '@/lib/content';
-import Link from 'next/link';
 
 export default async function PublicationDetailPage({ params }: { params: { slug: string } }) {
   const item = await getPublicationItem(params.slug);

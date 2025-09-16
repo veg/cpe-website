@@ -1,5 +1,4 @@
 import { getSoftwareItem } from '@/lib/content';
-import Link from 'next/link';
 
 export default async function SoftwareDetailPage({ params }: { params: { slug: string } }) {
   const item = await getSoftwareItem(params.slug);
