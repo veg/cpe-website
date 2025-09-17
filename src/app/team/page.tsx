@@ -1,25 +1,11 @@
-import { getMembers } from '@/lib/content';
+import { getMembers, MemberItem } from '@/lib/content';
 import Image from 'next/image';
-
-type Member = {
-  id: string;
-  name: string;
-  role: string;
-  image: string; // This is 'avatar' in the component
-  contentHtml: string;
-  email?: string;
-  github?: string;
-  linkedin?: string;
-  twitter?: string;
-  google_scholar?: string;
-  cv?: string;
-};
 
 export default async function TeamPage() {
   const members = await getMembers();
 
   // Sort members: directors first, then by name
-  const sortedMembers = members.sort((a: Member, b: Member) => {
+  const sortedMembers = members.sort((a: MemberItem, b: MemberItem) => {
     if (a.role === 'Co-director' && b.role !== 'Co-director') {
       return -1;
     }
@@ -33,7 +19,9 @@ export default async function TeamPage() {
     <section>
       <h1 className="text-3xl font-bold mb-8 text-center">Our Team</h1>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
-        {sortedMembers.map((member: Member) => (
+
+        {sortedMembers.map((member: MemberItem) => (
+
           <div key={member.id} className="bg-dark-gray text-white p-6 rounded-lg shadow-xl border-2 border-temple-red flex flex-col items-center text-center font-mono relative overflow-hidden">
             {/* Decorative top border */}
             <div className="absolute top-0 left-0 w-full h-2 bg-temple-red"></div>
@@ -41,7 +29,9 @@ export default async function TeamPage() {
             <div className="absolute bottom-0 left-0 w-full h-2 bg-temple-red"></div>
 
             <Image
-              src={member.image}
+
+              src={member.avatar}
+
               alt={`Photo of ${member.name}`}
               width={150}
               height={150}

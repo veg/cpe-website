@@ -1,7 +1,9 @@
 import { getSoftwareItem } from '@/lib/content';
 
-export default async function SoftwareDetailPage({ params }: { params: { slug: string } }) {
-  const item = await getSoftwareItem(params.slug);
+
+export default async function SoftwareDetailPage({ params, searchParams }: { params: Promise<Record<string, string | string[] | undefined>>, searchParams?: Promise<Record<string, string | string[] | undefined>> }) {
+  const resolvedParams = await params;
+  const item = await getSoftwareItem(resolvedParams.slug as string);
 
   if (!item) {
     return <div>Software not found.</div>;

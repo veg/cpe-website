@@ -80,7 +80,20 @@ async function getContent<T>(directory: string): Promise<T[]> {
   return allData as T[];
 }
 
-export async function getSoftwareItem(slug: string): Promise<SoftwareItem | undefined> {
+
+export interface SoftwareItem {
+  id: string;
+  contentHtml: string;
+  title: string;
+  description: string;
+  date: string; // Add this line
+  link?: string;
+  github?: string;
+  google_scholar?: string;
+}
+
+export async function getSoftwareItem(slug: string): Promise<SoftwareItem> {
+
   const fullPath = path.join(contentDirectory, 'software', `${slug}.md`);
   if (!fs.existsSync(fullPath)) {
     return undefined;
@@ -98,9 +111,23 @@ export async function getSoftwareItem(slug: string): Promise<SoftwareItem | unde
     contentHtml,
     ...matterResult.data,
   } as SoftwareItem;
+
 }
 
-export async function getPublicationItem(slug: string): Promise<PublicationItem | undefined> {
+interface PublicationItem {
+  id: string;
+  contentHtml: string;
+  title: string;
+  authors: string;
+  journal: string;
+  year: number;
+  date: string;
+  url?: string;
+  doi?: string;
+}
+
+export async function getPublicationItem(slug: string): Promise<PublicationItem> {
+
   const fullPath = path.join(contentDirectory, 'publications', `${slug}.md`);
   if (!fs.existsSync(fullPath)) {
     return undefined;
@@ -119,20 +146,39 @@ export async function getPublicationItem(slug: string): Promise<PublicationItem 
     date: `${matterResult.data.year}-01-01`, // Ensure date is always present
     ...matterResult.data,
   } as PublicationItem;
-}
 
 export function getPublications(): Promise<PublicationItem[]> {
-  return getContent<PublicationItem>('publications');
+  return getContent('publications') as Promise<PublicationItem[]>;
+}
+
+export interface MemberItem {
+  id: string;
+  contentHtml: string;
+  name: string;
+  role: string;
+  avatar: string;
+  email: string;
+  date: string; // Add this line
+  google_scholar?: string;
+  cv?: string;
 }
 
 export function getMembers(): Promise<MemberItem[]> {
-  return getContent<MemberItem>('members');
+  return getContent('members') as Promise<MemberItem[]>;
+}
+
+export interface NewsItem {
+  id: string;
+  contentHtml: string;
+  title: string;
+  date: string;
+  excerpt?: string;
 }
 
 export function getNews(): Promise<NewsItem[]> {
-  return getContent<NewsItem>('news');
+  return getContent('news') as Promise<NewsItem[]>;
 }
 
 export function getSoftware(): Promise<SoftwareItem[]> {
-  return getContent<SoftwareItem>('software');
+  return getContent('software') as Promise<SoftwareItem[]>;
 }

@@ -1,7 +1,9 @@
 import { getPublicationItem } from '@/lib/content';
 
-export default async function PublicationDetailPage({ params }: { params: { slug: string } }) {
-  const item = await getPublicationItem(params.slug);
+
+export default async function PublicationDetailPage({ params, searchParams }: { params: Promise<Record<string, string | string[] | undefined>>, searchParams?: Promise<Record<string, string | string[] | undefined>> }) {
+  const resolvedParams = await params;
+  const item = await getPublicationItem(resolvedParams.slug as string);
 
   if (!item) {
     return <div>Publication not found.</div>;
