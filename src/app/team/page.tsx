@@ -19,7 +19,9 @@ export default async function TeamPage() {
     <section>
       <h1 className="text-3xl font-bold mb-8 text-center">Our Team</h1>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+
         {sortedMembers.map((member: MemberItem) => (
+
           <div key={member.id} className="bg-dark-gray text-white p-6 rounded-lg shadow-xl border-2 border-temple-red flex flex-col items-center text-center font-mono relative overflow-hidden">
             {/* Decorative top border */}
             <div className="absolute top-0 left-0 w-full h-2 bg-temple-red"></div>
@@ -27,7 +29,9 @@ export default async function TeamPage() {
             <div className="absolute bottom-0 left-0 w-full h-2 bg-temple-red"></div>
 
             <Image
+
               src={member.avatar}
+
               alt={`Photo of ${member.name}`}
               width={150}
               height={150}
@@ -40,7 +44,7 @@ export default async function TeamPage() {
 
             <div className="text-left w-full mb-4">
               <p className="text-gray-400 mb-1">EMAIL:</p>
-              <a href={`mailto:${member.email}`} className="text-blue-400 hover:text-blue-300 underline">{member.email}</a>
+              {member.email && <a href={`mailto:${member.email}`} className="text-blue-400 hover:text-blue-300 underline">{member.email}</a>}
             </div>
 
             <div className="flex space-x-4 mt-2 mb-4">

@@ -2,7 +2,7 @@ import { getNews, NewsItem } from '@/lib/content';
 
 
 export default async function NewsPage() {
-  const news = await getNews();
+  const news: NewsItem[] = await getNews();
 
   return (
     <section>

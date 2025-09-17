@@ -7,7 +7,56 @@ import html from 'remark-html';
 
 const contentDirectory = path.join(process.cwd(), 'content');
 
-async function getContent(directory: string) {
+export type PublicationItem = {
+  id: string;
+  contentHtml: string;
+  title: string;
+  authors: string;
+  journal: string;
+  year: string;
+  pmid?: string;
+  doi?: string;
+  url?: string;
+  team_members?: string[];
+  keywords?: string[];
+  date: string; // Derived from year
+};
+
+export type SoftwareItem = {
+  id: string;
+  contentHtml: string;
+  title: string;
+  description: string;
+  github?: string;
+  website?: string;
+  link?: string; // Assuming 'link' might also be used for a general link
+  google_scholar?: string; // Assuming this might be present for software authors
+};
+
+export type NewsItem = {
+  id: string;
+  contentHtml: string;
+  title: string;
+  date: string;
+  excerpt?: string;
+  author?: string;
+};
+
+export type MemberItem = {
+  id: string;
+  contentHtml: string;
+  name: string;
+  role: string;
+  image: string;
+  email?: string;
+  github?: string;
+  linkedin?: string;
+  twitter?: string;
+  google_scholar?: string;
+  cv?: string;
+};
+
+async function getContent<T>(directory: string): Promise<T[]> {
   const fullPath = path.join(contentDirectory, directory);
   const fileNames = fs.readdirSync(fullPath);
   const allData = await Promise.all(fileNames.map(async (fileName) => {
@@ -21,8 +70,6 @@ async function getContent(directory: string) {
       .process(matterResult.content);
     const contentHtml = processedContent.toString();
 
-    
-
     return {
       id, // This will serve as the slug
       contentHtml,
@@ -30,8 +77,9 @@ async function getContent(directory: string) {
       ...matterResult.data,
     };
   }));
-  return allData;
+  return allData as T[];
 }
+
 
 export interface SoftwareItem {
   id: string;
@@ -45,7 +93,11 @@ export interface SoftwareItem {
 }
 
 export async function getSoftwareItem(slug: string): Promise<SoftwareItem> {
+
   const fullPath = path.join(contentDirectory, 'software', `${slug}.md`);
+  if (!fs.existsSync(fullPath)) {
+    return undefined;
+  }
   const fileContents = fs.readFileSync(fullPath, 'utf8');
   const matterResult = matter(fileContents);
 
@@ -59,6 +111,7 @@ export async function getSoftwareItem(slug: string): Promise<SoftwareItem> {
     contentHtml,
     ...matterResult.data,
   } as SoftwareItem;
+
 }
 
 interface PublicationItem {
@@ -74,7 +127,11 @@ interface PublicationItem {
 }
 
 export async function getPublicationItem(slug: string): Promise<PublicationItem> {
+
   const fullPath = path.join(contentDirectory, 'publications', `${slug}.md`);
+  if (!fs.existsSync(fullPath)) {
+    return undefined;
+  }
   const fileContents = fs.readFileSync(fullPath, 'utf8');
   const matterResult = matter(fileContents);
 
@@ -86,9 +143,9 @@ export async function getPublicationItem(slug: string): Promise<PublicationItem>
   return {
     id: slug,
     contentHtml,
+    date: `${matterResult.data.year}-01-01`, // Ensure date is always present
     ...matterResult.data,
   } as PublicationItem;
-}
 
 export function getPublications(): Promise<PublicationItem[]> {
   return getContent('publications') as Promise<PublicationItem[]>;
