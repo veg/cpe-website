@@ -1,9 +1,9 @@
-import type { Metadata } from "next";
+
 import "./globals.css";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 
-export const metadata: Metadata = {
+export const metadata = {
   title: "Temple Center for Pathogen Evolution",
   description: "Website for the Temple Center for Pathogen Evolution",
 };

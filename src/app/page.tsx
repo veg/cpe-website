@@ -1,4 +1,5 @@
 import Image from 'next/image';
+import Link from 'next/link';
 
 export default function Home() {
   return (
@@ -81,9 +82,9 @@ export default function Home() {
         <div className="bg-white rounded-lg shadow-md p-6 flex flex-col items-center text-center">
           <h4 className="text-2xl font-bold text-gray-800 mb-3">Tools</h4>
           <p className="text-gray-600 mb-4">A core strength of the Center is its comprehensive portfolio of software and modeling tools.</p>
-          <a href="/software" className="mt-auto bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full transition duration-300">
+          <Link href="/software/" className="mt-auto bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full transition duration-300">
             Tools
-          </a>
+          </Link>
         </div>
       </section>
     </div>
