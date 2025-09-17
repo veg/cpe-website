@@ -58,4 +58,20 @@
   .shadow-retro-button {
     box-shadow: 4px 4px 0px var(--color-dark-gray); /* Button shadow */
   }
+
+  .shadow-retro-game-card {
+    box-shadow: 10px 10px 0px var(--color-temple-red), 20px 20px 0px var(--color-dark-gray);
+  }
+
+  .shadow-retro-game-card-hover {
+    box-shadow: 5px 5px 0px var(--color-temple-red), 10px 10px 0px var(--color-dark-gray);
+  }
+
+  .text-shadow-retro-light {
+    text-shadow: 2px 2px 0px rgba(255, 255, 255, 0.5);
+  }
+
+  .text-shadow-retro-dark {
+    text-shadow: 2px 2px 0px rgba(0, 0, 0, 0.5);
+  }
 }

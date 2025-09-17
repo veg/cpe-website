@@ -176,6 +176,8 @@ To add a new software project:
 
 This project is designed to be easily deployed on [Vercel](https://vercel.com/). Simply connect your GitHub repository to Vercel, and it will automatically detect the Next.js framework and deploy your application.
 
+**Vercel Deployment:** [Your Vercel Deployment URL Here] (Please replace this with the actual URL after successful deployment.)
+
 ## Contributing
 
 Contributions are welcome! Please open an issue or submit a pull request for any improvements or bug fixes.
